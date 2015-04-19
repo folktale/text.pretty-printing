@@ -1,7 +1,7 @@
 text.pretty-printing
 ====================
 
-[![Build status](https://img.shields.io/travis/folktale/text.pretty-printing/master.svg?style=flat-square)](https://travis-ci.org/folktale/text.pretty-printing)[![NPM version](https://img.shields.io/npm/v/text.pretty-printing.svg?style=flat-square)](https://npmjs.org/package/text.pretty-printing)[![Dependencies status](https://img.shields.io/david/folktale/text.pretty-printing.svg?style=flat-square)](https://david-dm.org/folktale/text.pretty-printing)![Licence](https://img.shields.io/npm/l/text.pretty-printing.svg?style=flat-square&label=licence)![Stable](https://img.shields.io/badge/stability-experimental-green.svg?style=flat-square)
+[![Build status](https://img.shields.io/travis/folktale/text.pretty-printing/master.svg?style=flat-square)](https://travis-ci.org/folktale/text.pretty-printing)[![NPM version](https://img.shields.io/npm/v/text.pretty-printing.svg?style=flat-square)](https://npmjs.org/package/text.pretty-printing)[![Dependencies status](https://img.shields.io/david/folktale/text.pretty-printing.svg?style=flat-square)](https://david-dm.org/folktale/text.pretty-printing)![Licence](https://img.shields.io/npm/l/text.pretty-printing.svg?style=flat-square&label=licence)![Stable](https://img.shields.io/badge/stability-stable-green.svg?style=flat-square)
 
 
 An implementation of Wadler's Pretty Printer; an efficient algebra that
