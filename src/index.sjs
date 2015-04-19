@@ -93,6 +93,7 @@ function best(width, indentation, doc) {
   return trampoline(go(width, indentation, [[0, doc]]));
 
   // #### function: go
+  // @private
   // @type: Int, Int, (Int, DOC) → Doc
   function go(w, k, x) {
     return match x {
@@ -109,13 +110,15 @@ function best(width, indentation, doc) {
     }
   }
 
-  // #### function: go
+  // #### function: better
+  // @private
   // @type: Int, Int, Doc, (Unit → Doc) → Doc
   function better(w, k, x, y) {
     return fits(w - k, x)? x : y()
   }
 
   // #### function: fits
+  // @private
   // @type: Int, Doc → Boolean
   function fits {
     (w, x) if w < 0 => false,

@@ -114,9 +114,9 @@ function flatten {
   CONCAT(a, b)   => CONCAT(flatten(a), flatten(b)),
   NEST(depth, a) => NEST(depth, flatten(a)),
   TEXT(s)        => TEXT(s),
-  LINE           => TEXT(\" \"),
+  LINE           => TEXT(" "),
   UNION(a, b)    => flatten(a),
-  a              => (function(){ throw new Error(\"No match: \" + a) })();
+  a              => (function(){ throw new Error("No match: " + a) })();
 }
 
 ```
@@ -143,7 +143,7 @@ function best(width, indentation, doc) {
 ```
  
 
-#### function: `go`
+#### private function: `go`
 
 
 ```hs
@@ -154,7 +154,7 @@ Int, Int, (Int, DOC) → Doc
 
 
 
-
+ 
 ```js
   function go(w, k, x) {
     return match x {
@@ -174,7 +174,7 @@ Int, Int, (Int, DOC) → Doc
 ```
  
 
-#### function: `go`
+#### private function: `better`
 
 
 ```hs
@@ -185,7 +185,7 @@ Int, Int, Doc, (Unit → Doc) → Doc
 
 
 
-
+ 
 ```js
   function better(w, k, x, y) {
     return fits(w - k, x)? x : y()
@@ -194,7 +194,7 @@ Int, Int, Doc, (Unit → Doc) → Doc
 ```
  
 
-#### function: `fits`
+#### private function: `fits`
 
 
 ```hs
@@ -205,7 +205,7 @@ Int, Doc → Boolean
 
 
 
-
+ 
 ```js
   function fits {
     (w, x) if w < 0 => false,
@@ -234,7 +234,7 @@ Converts a simple document to a string.
  
 ```js
 function layout {
-  Nil        => \"\",
+  Nil        => "",
   Text(s, a) => s + layout(a),
   Line(i, a) => '\n' + repeat(i, ' ') + layout(a)
 }
@@ -258,7 +258,7 @@ Concatenates two documents horizontally, separated by a single space.
  
 ```js
 function horizontalConcat(x, y) {
-  return x +++ text(\" \") +++ y
+  return x +++ text(" ") +++ y
 }
 
 ```
@@ -687,7 +687,7 @@ Joins two documents together, either by separating with a single horizontal spac
 
 ```js
 function join(x, y) {
-  return x +++ UNION(text(\" \"), line()) +++ y
+  return x +++ UNION(text(" "), line()) +++ y
 }
 
 ```
