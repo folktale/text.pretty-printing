@@ -4,7 +4,7 @@
 // As described in the paper, the pretty printer is an efficient
 // algebra that supports multiple adaptable layouts according to the
 // available space.
-// [pp]: http:\/\/homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf
+// [pp]: http:\/\/homepages.inf.ed.ac.uk\/wadler\/papers\/prettier\/prettier.pdf
 
 
 // -- Dependencies -----------------------------------------------------
