@@ -3,5 +3,5 @@ node_modules/
 dist/
 lib/
 npm-debug.log
-docs/
+docs/build/
 examples/*.js

@@ -67,6 +67,9 @@ $(TEST_BLD)/%.js: $(TEST_DIR)/%.sjs
 	       --output $@             \
 	       $<
 
+docs/source/index.rst: src/index.sjs
+	$(dollphie) --input javascript --output sphinx src/index.sjs > docs/source/index.rst
+
 
 # -- Tasks -------------------------------------------------------------
 source: $(TGT)
@@ -78,8 +81,8 @@ bundle: dist/$(PACKAGE).umd.js
 
 minify: dist/$(PACKAGE).umd.min.js
 
-documentation:
-	$(dollphie) --input javascript --output markdown src/index.sjs > docs.md
+documentation: docs/source/index.rst
+	cd docs && $(MAKE) html
 
 clean:
 	rm -rf dist build $(LIB_DIR)
