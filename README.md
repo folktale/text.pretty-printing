@@ -45,12 +45,12 @@ var tree = new Branch(
 
 console.log(tree.toString(30, 4))
 // => "Branch(
-          Branch(
-              Leaf(1), Branch(
-                  Leaf(2), Leaf(3)
-              )
-          ), Leaf(4)
-      )"
+//        Branch(
+//            Leaf(1), Branch(
+//                Leaf(2), Leaf(3)
+//            )
+//        ), Leaf(4)
+//    )"
 
 console.log(tree.toString(80, 4))
 // => "Branch( Branch( Leaf(1), Branch( Leaf(2), Leaf(3) ) ), Leaf(4) )"
