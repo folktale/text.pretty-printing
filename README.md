@@ -61,42 +61,9 @@ See the `examples/` folder for additional examples.
 
 ## Installing
 
-The easiest way is to grab it from NPM. If you're running in a Browser
-environment, you can use [Browserify][]
+Grab the latest release from npm:
 
     $ npm install text.pretty-printing
-
-
-### Using with CommonJS
-
-If you're not using NPM, [Download the latest release][release], and require
-the `text.pretty-printing.umd.js` file:
-
-```js
-var PrettyPrinter = require('text.pretty-printing')
-```
-
-
-### Using with AMD
-
-[Download the latest release][release], and require the `text.pretty-printing.umd.js`
-file:
-
-```js
-require(['text.pretty-printing'], function(PrettyPrinter) {
-  ( ... )
-})
-```
-
-
-### Using without modules
-
-[Download the latest release][release], and load the `text.pretty-printing.umd.js`
-file. The properties are exposed in the global `Folktale.Text.PrettyPrinting` object:
-
-```html
-<script src="/path/to/text.pretty-printing.umd.js"></script>
-```
 
 
 ### Compiling from source
@@ -115,14 +82,14 @@ any JavaScript environment.
     
 ## Documentation
 
-You can [read the documentation online][docs] or build it yourself:
+You'll need [Sphinx][] to generate the documentation:
 
     $ git clone git://github.com/folktale/text.pretty-printing.git
     $ cd text.pretty-printing
     $ npm install
     $ make documentation
 
-Then open the file `docs.md`.
+Then open the file `docs/build/html/index.html`.
 
 
 ## Platform support
@@ -144,7 +111,5 @@ Released under the [MIT licence](https://github.com/folktale/text.pretty-printin
 [Make]: http://www.gnu.org/software/make/
 [Node.js]: http://nodejs.org/
 [es5-shim]: https://github.com/kriskowal/es5-shim
-[docs]: https://github.com/folktale/text.pretty-printing/blob/master/docs.md
-<!-- [release: https://github.com/folktale/text.pretty-printing/releases/download/v$VERSION/text.pretty-printing-$VERSION.tar.gz] -->
-[release]: https://github.com/folktale/text.pretty-printing/releases/download/v1.0.1/text.pretty-printing-1.0.1.tar.gz
-<!-- [/release] -->
+[Sphinx]: http://sphinx-doc.org/
+
