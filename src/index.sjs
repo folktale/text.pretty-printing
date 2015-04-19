@@ -2,19 +2,20 @@
 //
 // @stability:   Stable
 // @portability: Portable
+// @platform:    ECMAScript 5
+// @synopsis:    Compositional pretty printer supporting multiple layouts.
 //
-// This module is an implementation of Wadler's [Pretty Printer][pp].
+// This module is an implementation of Wadler's @link(text: "Pretty Printer").
 // As described in the paper, the pretty printer is an efficient
 // algebra that supports multiple adaptable layouts according to the
 // available space.
 //
-// [pp]: http:\/\/homepages.inf.ed.ac.uk\/wadler\/papers\/prettier\/prettier.pdf
-
+// @ref("Pretty Printer"): http://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf
 
 // -- Dependencies -----------------------------------------------------
 var { Base }  = require('adt-simple');
 var { curry } = require('core.lambda');
-var { trampoline, done, ternary } = require('./tramp')
+var { Done, trampoline, done, ternary, binary, nary } = require('./tramp')
 
 // -- Data structures --------------------------------------------------
 //
@@ -101,30 +102,62 @@ function best(width, indentation, doc) {
       [[i, NIL], ...xs]          => ternary(go, w, k, xs),
       [[i, CONCAT(x, y)], ...xs] => ternary(go, w, k, [[i, x], [i, y]] +++ xs),
       [[i, NEST(j, x)], ...xs]   => ternary(go, w, k, [[i + j, x]] +++ xs),
-      [[i, TEXT(s)], ...xs]      => done(Text(s, trampoline(go(w, k + s.length, xs)))),
-      [[i, LINE], ...xs]         => done(Line(i, trampoline(go(w, i, xs)))),
-      [[i, UNION(x, y)], ...xs]  => done(better(w, k,
-                                                trampoline(go(w, k, [[i, x]] +++ xs)),
-                                                λ[trampoline(go(w, k, [[i, y]] +++ xs))]
-                                               ))
+      [[i, TEXT(s)], ...xs]      => binary(_text, s, go(w, k + s.length, xs)),
+      [[i, LINE], ...xs]         => binary(_line, i, go(w, i, xs)),
+      [[i, UNION(x, y)], ...xs]  => better(w, k,
+                                           ternary(go, w, k, [[i, x]] +++ xs),
+                                           λ[ternary(go, w, k, [[i, y]] +++ xs)]
+                                          )
     }
   }
 
-  // #### function: better
+  // #### function: _text
+  // Wraps the Text() constructor for trampolining.
+  // @private
+  // @type: String, Continuation
+  function _text(s, g) {
+    if (g instanceof Done) {
+      return done(Text(s, g.value))
+    } else {
+      return binary(_text, s, g.apply())
+    }
+  }
+
+  // #### function: _line
+  // Wraps the Line() constructor for trampolining.
+  // @private
+  // @type: Int, Continuation
+  function _line(i, g) {
+    if (g instanceof Done) {
+      return done(Line(i, g.value))
+    } else {
+      return binary(_line, i, g.apply())
+    }
+  }
+
+  // #### function: go
+  // Chooses the best-looking of two styles. @literal("y") is thunked to avoid
+  // costly computations.
   // @private
   // @type: Int, Int, Doc, (Unit → Doc) → Doc
   function better(w, k, x, y) {
-    return fits(w - k, x)? x : y()
+    if (x instanceof Done) {
+      return fits(w - k, x.value)? done(x.value) : y()
+    } else {
+      return nary(better, [w, k, x.apply(), y])
+    }
   }
 
   // #### function: fits
+  // Checks if some document fits in the rest of the line.
   // @private
   // @type: Int, Doc → Boolean
   function fits {
     (w, x) if w < 0 => false,
     (w, Nil)        => true,
     (w, Text(s, x)) => fits(w - s.length, x),
-    (w, Line(i, x)) => true
+    (w, Line(i, x)) => true,
+    (w, x) => (function(){ throw new Error("No match: " + show(w) + ", " + show(x)) })()
   }
 }
 
@@ -325,7 +358,7 @@ function stack(xs) {
 //   pretty(5, bracket(2, '[', stack([
 //     text('a'), text('b'), text('c')
 //   ]), ']'))
-//   // => "[ \n  a\n  b\n  c \n ]"
+//   // => "[\n  a\n  b\n  c \n]"
 // }}}
 //
 // @type: Int → DOC → DOC → DOC → DOC
