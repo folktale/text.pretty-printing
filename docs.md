@@ -133,7 +133,7 @@ Int, Int, DOC → DOC
 
 
 
-Best chooses the best\-looking alternative from a set of possible layouts a document may have. It takes into account the available layout for the rest of the document when doing so. 
+Best chooses the best-looking alternative from a set of possible layouts a document may have. It takes into account the available layout for the rest of the document when doing so. 
 
  
 ```js
@@ -330,7 +330,7 @@ Unit → DOC
 
 Constructs an empty document. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, nil()) // => ""
@@ -360,7 +360,7 @@ DOC → DOC → DOC
 
 Joins two documents horizontally, without any separation between them. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, concat(text('a'), text('b'))) // => "ab"
@@ -391,7 +391,7 @@ Int → DOC → DOC
 
 Indents a document a given amount of spaces. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, stack([
@@ -426,7 +426,7 @@ String → DOC
 
 Represents plain text in a document. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, text("a")) // => "a"
@@ -456,7 +456,7 @@ Unit → DOC
 
 Represents a line break in a document. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, concat(concat(text("a"), line()), text("b"))
@@ -487,7 +487,7 @@ DOC → DOC
 
 Creates a set of alternative layouts for the document. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(5, group(stack([text('foo'), text('bar')])))
@@ -527,7 +527,7 @@ Int → DOC → String
 
 Returns the best representation of a document for the given amount of horizontal space available, as a String. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, spread([text('hello'), text('world')]))
@@ -588,7 +588,7 @@ Array(DOC) → DOC
 
 Lays out a series of documents horizontally, with each document separated by a single space. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, spread([text('foo'), text('bar')]))
@@ -619,7 +619,7 @@ Array(DOC) → DOC
 
 Lays out a series of documents vertically, with each document separated by a single new line. 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(80, stack([text('foo'), text('bar')]))
@@ -648,7 +648,7 @@ Int → DOC → DOC → DOC → DOC
 
 
 
-\*\*Example\*\*: 
+**Example**: 
 ```js
 
   pretty(5, bracket(2, '[', stack([
