@@ -1,7 +1,7 @@
 text.pretty-printing
 ====================
 
-[![Build status](https://img.shields.io/travis/folktale/text.pretty-printing/master.svg?style=flat-square)](https://travis-ci.org/folktale/text.pretty-printing)[![NPM version](https://img.shields.io/npm/v/text.pretty-printing.svg?style=flat-square)](https://npmjs.org/package/text.pretty-printing)[![Dependencies status](https://img.shields.io/david/folktale/text.pretty-printing.svg?style=flat-square)](https://david-dm.org/folktale/text.pretty-printing)![Licence](https://img.shields.io/npm/l/text.pretty-printing.svg?style=flat-square&label=licence)![Experimental](https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square)
+[![Build status](https://img.shields.io/travis/folktale/text.pretty-printing/master.svg?style=flat-square)](https://travis-ci.org/folktale/text.pretty-printing)[![NPM version](https://img.shields.io/npm/v/text.pretty-printing.svg?style=flat-square)](https://npmjs.org/package/text.pretty-printing)[![Dependencies status](https://img.shields.io/david/folktale/text.pretty-printing.svg?style=flat-square)](https://david-dm.org/folktale/text.pretty-printing)![Licence](https://img.shields.io/npm/l/text.pretty-printing.svg?style=flat-square&label=licence)![Stable](https://img.shields.io/badge/stability-experimental-green.svg?style=flat-square)
 
 
 An implementation of Wadler's Pretty Printer; an efficient algebra that
@@ -146,5 +146,5 @@ Released under the [MIT licence](https://github.com/folktale/text.pretty-printin
 [es5-shim]: https://github.com/kriskowal/es5-shim
 [docs]: https://github.com/folktale/text.pretty-printing/blob/master/docs.md
 <!-- [release: https://github.com/folktale/text.pretty-printing/releases/download/v$VERSION/text.pretty-printing-$VERSION.tar.gz] -->
-[release]: https://github.com/folktale/text.pretty-printing/releases/download/v0.0.0/text.pretty-printing-0.0.0.tar.gz
+[release]: https://github.com/folktale/text.pretty-printing/releases/download/v1.0.0/text.pretty-printing-1.0.0.tar.gz
 <!-- [/release] -->

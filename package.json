@@ -1,6 +1,6 @@
 {
   "name": "text.pretty-printing",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An implementation of Wadler's Pretty Printer",
   "main": "lib/index.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "adt-simple": "^0.1.3",
     "alright": "^1.1.0",
     "browserify": "^6.1.0",
-    "dollphie": "0.0.2",
+    "dollphie": "^0.1.0",
     "es6-macros": "0.0.7",
     "lambda-chop": "^0.1.5",
     "macros.operators": "^0.5.1",

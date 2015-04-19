@@ -1,8 +1,10 @@
 # module: `Text.PrettyPrinting`
 
+- **Stability**: [![3. Stable](https://img.shields.io/badge/stability-3._Stable-green.svg?style=flat-square)](https://nodejs.org/api/documentation.html#documentation_stability_index)
+- **Portability**: Portable
 
 
-This module is an implementation of Wadler's [Pretty Printer][pp]. As described in the paper, the pretty printer is an efficient algebra that supports multiple adaptable layouts according to the available space. 
+ This module is an implementation of Wadler's [Pretty Printer][pp]. As described in the paper, the pretty printer is an efficient algebra that supports multiple adaptable layouts according to the available space. 
 
 [pp]: http://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf 
 
@@ -11,8 +13,10 @@ This module is an implementation of Wadler's [Pretty Printer][pp]. As described 
 
 
 
+
+
 ```js
-var { Base }  = require('adt\-simple');
+var { Base }  = require('adt-simple');
 var { curry } = require('core.lambda');
 var { trampoline, done, ternary } = require('./tramp')
 
@@ -20,6 +24,8 @@ var { trampoline, done, ternary } = require('./tramp')
  
 
 ## Data structures
+
+
 
 
 
@@ -64,11 +70,18 @@ DOC::nest = function(indent) {
 
 
 
-### function: `Repeat`
 
-- **Signature**: Int, String → String
 
-- **Private**: true
+### private function: `Repeat`
+
+
+```hs
+Int, String → String
+```
+
+
+
+
 
 Returns a String with `s` repeated `n` times. 
 
@@ -81,11 +94,16 @@ function repeat(n, s) {
 ```
  
 
-### function: `flatten`
+### private function: `flatten`
 
-- **Signature**: DOC → DOC
 
-- **Private**: true
+```hs
+DOC → DOC
+```
+
+
+
+
 
 Flatten replaces line breaks in a set of layouts by a single whitespace. It's defined privately so the invariants may hold. 
 
@@ -104,11 +122,16 @@ function flatten {
 ```
  
 
-### function: `best`
+### private function: `best`
 
-- **Signature**: Int, Int, DOC → DOC
 
-- **Private**: true
+```hs
+Int, Int, DOC → DOC
+```
+
+
+
+
 
 Best chooses the best\-looking alternative from a set of possible layouts a document may have. It takes into account the available layout for the rest of the document when doing so. 
 
@@ -122,7 +145,13 @@ function best(width, indentation, doc) {
 
 #### function: `go`
 
-- **Signature**: Int, Int, (Int, DOC) → Doc
+
+```hs
+Int, Int, (Int, DOC) → Doc
+```
+
+
+
 
 
 
@@ -147,13 +176,19 @@ function best(width, indentation, doc) {
 
 #### function: `go`
 
-- **Signature**: Int, Int, Doc, (Unit → Doc) → Doc
+
+```hs
+Int, Int, Doc, (Unit → Doc) → Doc
+```
+
+
+
 
 
 
 ```js
   function better(w, k, x, y) {
-    return fits(w \- k, x)? x : y()
+    return fits(w - k, x)? x : y()
   }
 
 ```
@@ -161,7 +196,13 @@ function best(width, indentation, doc) {
 
 #### function: `fits`
 
-- **Signature**: Int, Doc → Boolean
+
+```hs
+Int, Doc → Boolean
+```
+
+
+
 
 
 
@@ -169,7 +210,7 @@ function best(width, indentation, doc) {
   function fits {
     (w, x) if w < 0 => false,
     (w, Nil)        => true,
-    (w, Text(s, x)) => fits(w \- s.length, x),
+    (w, Text(s, x)) => fits(w - s.length, x),
     (w, Line(i, x)) => true
   }
 }
@@ -177,11 +218,16 @@ function best(width, indentation, doc) {
 ```
  
 
-### function: `layout`
+### private function: `layout`
 
-- **Signature**: Doc → String
 
-- **Private**: true
+```hs
+Doc → String
+```
+
+
+
+
 
 Converts a simple document to a string. 
 
@@ -196,11 +242,16 @@ function layout {
 ```
  
 
-### function: `horizontalConcat`
+### private function: `horizontalConcat`
 
-- **Signature**: DOC, DOC → DOC
 
-- **Private**: true
+```hs
+DOC, DOC → DOC
+```
+
+
+
+
 
 Concatenates two documents horizontally, separated by a single space. 
 
@@ -213,11 +264,16 @@ function horizontalConcat(x, y) {
 ```
  
 
-### function: `verticalConcat`
+### private function: `verticalConcat`
 
-- **Signature**: DOC, DOC → DOC
 
-- **Private**: true
+```hs
+DOC, DOC → DOC
+```
+
+
+
+
 
 Concatenates two documents vertically, separated by a new line. 
 
@@ -230,11 +286,16 @@ function verticalConcat(x, y) {
 ```
  
 
-### function: `words`
+### private function: `words`
 
-- **Signature**: String → Array(String)
 
-- **Private**: true
+```hs
+String → Array(String)
+```
+
+
+
+
 
 Converts a string into a list of words. 
 
@@ -252,16 +313,24 @@ function words(s) {
 
 
 
+
+
 Wadler's pretty printer define several primitive functions for working with the two aforementioned algebras. Combinators can be easily derived from these basic building blocks (and a few area also provided). 
 
 ### function: `nil`
 
-- **Signature**: Unit → DOC
+
+```hs
+Unit → DOC
+```
+
+
+
 
 
 Constructs an empty document. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, nil()) // => ""
@@ -280,12 +349,18 @@ function nil() {
 
 ### function: `concat`
 
-- **Signature**: DOC → DOC → DOC
+
+```hs
+DOC → DOC → DOC
+```
+
+
+
 
 
 Joins two documents horizontally, without any separation between them. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, concat(text('a'), text('b'))) // => "ab"
@@ -305,12 +380,18 @@ function concat(a, b) {
 
 ### function: `nest`
 
-- **Signature**: Int → DOC → DOC
+
+```hs
+Int → DOC → DOC
+```
+
+
+
 
 
 Indents a document a given amount of spaces. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, stack([
@@ -334,12 +415,18 @@ function nest(depth, a) {
 
 ### function: `text`
 
-- **Signature**: String → DOC
+
+```hs
+String → DOC
+```
+
+
+
 
 
 Represents plain text in a document. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, text("a")) // => "a"
@@ -358,12 +445,18 @@ function text(s) {
 
 ### function: `line`
 
-- **Signature**: Unit → DOC
+
+```hs
+Unit → DOC
+```
+
+
+
 
 
 Represents a line break in a document. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, concat(concat(text("a"), line()), text("b"))
@@ -383,12 +476,18 @@ function line() {
 
 ### function: `group`
 
-- **Signature**: DOC → DOC
+
+```hs
+DOC → DOC
+```
+
+
+
 
 
 Creates a set of alternative layouts for the document. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(5, group(stack([text('foo'), text('bar')])))
@@ -413,14 +512,22 @@ function group(a) {
 
 
 
+
+
 ### function: `pretty`
 
-- **Signature**: Int → DOC → String
+
+```hs
+Int → DOC → String
+```
+
+
+
 
 
 Returns the best representation of a document for the given amount of horizontal space available, as a String. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, spread([text('hello'), text('world')]))
@@ -442,9 +549,17 @@ function pretty(width, doc) {
 
 
 
+
+
 ### function: `foldDoc`
 
-- **Signature**: (DOC, DOC → DOC) → Array(DOC) → DOC
+
+```hs
+(DOC, DOC → DOC) → Array(DOC) → DOC
+```
+
+
+
 
 
 Allows folding over pairs of documents (similar to a catamorphism). 
@@ -462,12 +577,18 @@ function foldDoc {
 
 ### function: `spread`
 
-- **Signature**: Array(DOC) → DOC
+
+```hs
+Array(DOC) → DOC
+```
+
+
+
 
 
 Lays out a series of documents horizontally, with each document separated by a single space. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, spread([text('foo'), text('bar')]))
@@ -487,12 +608,18 @@ function spread(xs) {
 
 ### function: `stack`
 
-- **Signature**: Array(DOC) → DOC
+
+```hs
+Array(DOC) → DOC
+```
+
+
+
 
 
 Lays out a series of documents vertically, with each document separated by a single new line. 
 
-**Example**: 
+\*\*Example\*\*: 
 ```js
 
   pretty(80, stack([text('foo'), text('bar')]))
@@ -512,10 +639,16 @@ function stack(xs) {
 
 ### function: `bracket`
 
-- **Signature**: Int → DOC → DOC → DOC → DOC
+
+```hs
+Int → DOC → DOC → DOC → DOC
+```
 
 
-**Example**: 
+
+
+
+\*\*Example\*\*: 
 ```js
 
   pretty(5, bracket(2, '[', stack([
@@ -540,7 +673,13 @@ function bracket(indent, left, x, right) {
 
 ### function: `join`
 
-- **Signature**: DOC → DOC → DOC
+
+```hs
+DOC → DOC → DOC
+```
+
+
+
 
 
 Joins two documents together, either by separating with a single horizontal space or a single new line. 
@@ -556,7 +695,13 @@ function join(x, y) {
 
 ### function: `fillWords`
 
-- **Signature**: String → DOC
+
+```hs
+String → DOC
+```
+
+
+
 
 
 Makes the best use of the available space for laying out words, either separated by a space or a new line. 
@@ -572,7 +717,13 @@ function fillWords(s) {
 
 ### function: `fill`
 
-- **Signature**: Array(DOC) → DOC
+
+```hs
+Array(DOC) → DOC
+```
+
+
+
 
 
 Makes the best use of the available space for layout out a series of documents, either separated by a space or a new line. 
@@ -591,6 +742,8 @@ function fill {
  
 
 ## Exports
+
+
 
 
 
