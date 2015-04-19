@@ -146,5 +146,5 @@ Released under the [MIT licence](https://github.com/folktale/text.pretty-printin
 [es5-shim]: https://github.com/kriskowal/es5-shim
 [docs]: https://github.com/folktale/text.pretty-printing/blob/master/docs.md
 <!-- [release: https://github.com/folktale/text.pretty-printing/releases/download/v$VERSION/text.pretty-printing-$VERSION.tar.gz] -->
-[release]: https://github.com/folktale/text.pretty-printing/releases/download/v1.0.0/text.pretty-printing-1.0.0.tar.gz
+[release]: https://github.com/folktale/text.pretty-printing/releases/download/v1.0.1/text.pretty-printing-1.0.1.tar.gz
 <!-- [/release] -->
