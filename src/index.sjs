@@ -142,7 +142,7 @@ function best(width, indentation, doc) {
   // @type: Int, Int, Doc, (Unit → Doc) → Doc
   function better(w, k, x, y) {
     if (x instanceof Done) {
-      return fits(w - k, x.value)? done(x.value) : y()
+      return trampoline(fits(w - k, x.value))? done(x.value) : y()
     } else {
       return nary(better, [w, k, x.apply(), y])
     }
@@ -153,10 +153,10 @@ function best(width, indentation, doc) {
   // @private
   // @type: Int, Doc → Boolean
   function fits {
-    (w, x) if w < 0 => false,
-    (w, Nil)        => true,
-    (w, Text(s, x)) => fits(w - s.length, x),
-    (w, Line(i, x)) => true,
+    (w, x) if w < 0 => done(false),
+    (w, Nil)        => done(true),
+    (w, Text(s, x)) => binary(fits, w - s.length, x),
+    (w, Line(i, x)) => done(true),
     (w, x) => (function(){ throw new Error("No match: " + show(w) + ", " + show(x)) })()
   }
 }
@@ -166,10 +166,16 @@ function best(width, indentation, doc) {
 //
 // @private
 // @type: Doc → String
-function layout {
-  Nil        => "",
-  Text(s, a) => s + layout(a),
-  Line(i, a) => '\n' + repeat(i, ' ') + layout(a)
+function layout(doc) {
+  return trampoline(go(doc, ""));
+  
+  function go(x, r) {
+    return match x {
+      Nil        => done(r),
+      Text(s, a) => binary(go, a, r + s),
+      Line(i, a) => binary(go, a, r + '\n' + repeat(i, ' '))
+    }
+  }
 }
 
 // ### function: horizontalConcat
